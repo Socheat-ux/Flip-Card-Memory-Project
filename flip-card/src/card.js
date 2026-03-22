@@ -1,0 +1,3 @@
+const cardImg = [
+   { "src": "./img/" }
+]
