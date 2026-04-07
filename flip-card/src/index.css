@@ -8,6 +8,7 @@
   --button-hover: #a4a13d;
   --start-button: #88DF70;
   --start-button-hover: #4b964b;
+  --card-color: #fffb88;
   /* font-family: "Montserrat", sans-serif; */
 }
 
@@ -185,23 +186,32 @@ body {
   cursor: pointer;
   font-size: 1rem;
   transition: transform 0.15s, background-color 0.15s;
-  background-color: var(--color-button); /* default color */
+  background-color: var(--color-button);
   color: black;
+  margin: 5px;
 }
 
-/* Hover effect */
 .level-btn:hover {
   transform: scale(1.05);
-  background-color: var(--button-hover); /* hover color */
+  background-color: var(--button-hover);
 }
 
-/* Active state: changes color after click */
+.level-btn.easy.active {
+  background-color: var(--button-hover);
+}
+
+.level-btn.medium.active {
+  background-color: var(--button-hover);
+}
+
+.level-btn.hard.active {
+  background-color: var(--button-hover);
+}
+
 .level-btn.active {
-  background-color: var(--button-hover); /* color stays after click */
-  transform: scale(1.05);                /* same as hover */
+  transform: scale(1.05);
 }
 
-/* Show description on hover or when active */
 .level-btn .level-desc {
   display: none;
   font-size: 0.9rem;
@@ -242,6 +252,7 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: black;
   margin-bottom: 16px;
 }
 
@@ -253,10 +264,10 @@ hr {
 }
 
 .back-btn, .restart-btn {
-  background: #0f3460; color: white; border: none;
+  background: var(--color-button); color: black; border: none;
   padding: 8px 16px; border-radius: 8px; cursor: pointer;
 }
-.back-btn:hover, .restart-btn:hover { background: #1a4a80; }
+.back-btn:hover, .restart-btn:hover { background: var(--button-hover); }
 
 .turns { margin-bottom: 16px; font-size: 1.1rem; }
 
@@ -275,7 +286,15 @@ hr {
   padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95rem;
 }
 
-.card-grid { display: grid; gap: 10px; }
+.card-grid { 
+  display: grid; 
+  justify-self: center;
+  background-color: var(--card-color);
+  gap: 10px; 
+  padding: 30px;
+  border-radius: 12px;
+  width: 1000px;
+}
 
 .card { height: 90px; perspective: 1000px; cursor: pointer; }
 .card-inner {
@@ -292,10 +311,22 @@ hr {
   display: flex; align-items: center; justify-content: center;
   font-size: 2rem;
 }
-.card-front { background: #16213e; transform: rotateY(180deg); }
-.card-back  { background: #0f3460; border: 2px solid #e94560; }
+.card-front { 
+  background: #ecf1ff; 
+  transform: rotateY(180deg); 
+  border: 2px solid var(--button-hover);
+}
+
+.card-front img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.card-back  { background: #ffffff; border: 2px solid var(--button-hover); }
 
 .game-stats {
+  color: black;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -306,13 +337,13 @@ hr {
 .timer {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #60a5fa;
+  color: black;
 }
 
 /* flashes red when 10 seconds left */
 .timer.danger {
-  color: #fb7185;
-  animation: pulse 1s ease-in-out infinite;
+  color: #fc0429;
+  animation: pulse 1s ease-in-out infinite; 
 }
 
 @keyframes pulse {

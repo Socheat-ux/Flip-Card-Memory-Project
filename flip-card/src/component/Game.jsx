@@ -119,7 +119,7 @@ function Game ({difficulty, onHome}) {
 
             {/* Timer + Turns */}
             <div className="game-stats">
-                <p className="turns">Turns: <strong>{turns}</strong></p>
+                <p className="turns">Moves: <strong>{turns}</strong></p>
                 <p className={`timer ${timeLeft <= 10 ? "danger" : ""}`}>
                  {formatTime(timeLeft)}
                 </p>

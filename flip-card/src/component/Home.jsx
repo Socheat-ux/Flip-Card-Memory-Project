@@ -2,16 +2,16 @@ import React from "react";
 
 const Home = ({ onSelect, onStartGame }) => {
   const levels = [
-    { name: "Easy", desc: "16 cards" },
-    { name: "Medium", desc: "24 cards" },
-    { name: "Hard", desc: "32 cards" },
-  ];
+    { name: "Easy", desc: "16 cards", pairs: 8 },
+    { name: "Medium", desc: "24 cards", pairs: 12 },
+    { name: "Hard", desc: "32 cards", pairs: 16 },
+  ];    
 
   const [selectedLevel, setSelectedLevel] = React.useState(null);
 
   const handleSelect = (level) => {
     setSelectedLevel(level.name);
-    onSelect(level);
+    if (onSelect) onSelect(level);
   };
 
     return(
