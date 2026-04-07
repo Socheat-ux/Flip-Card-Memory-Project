@@ -7,7 +7,7 @@ function Header({ user, onLogout, onNavigate }) {
   return (
     <header className="site-header">
       <div className="header-logo" onClick={() => onNavigate("home")}>
-        ⟨ Flip Cards ⟩
+        ⟨ Flip Cards Game ⟩
       </div>
 
       <div className="header-right">
