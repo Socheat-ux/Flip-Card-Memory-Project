@@ -1,9 +1,9 @@
 
 const Home = () => {
     const levels = [
-       {name: "Easy", pairs: 4, emoji: "🟢", desc:"8 cards"},
-       {name: "Medium", pairs: 8, emoji: "🟡", desc:"16 cards"},
-       {name: "Hard", pairs: 12, emoji: "🔴", desc:"24 cards"},
+       {name: "Easy", pairs: 8, emoji: "🟢", desc:"16 cards"},
+       {name: "Medium", pairs: 12, emoji: "🟡", desc:"24 cards"},
+       {name: "Hard", pairs: 16, emoji: "🔴", desc:"32 cards"},
     ];
 
     return(

@@ -70,7 +70,7 @@ function Game () {
             <div className="game-header">
                 <button className="back-btn" onClick={onHome}>← Home</button>
                 <h2>{difficulty.name} Mode</h2>
-                <button className="restart-btn" onClick={restartGame}>↺ Restart</button>
+                <button className="restart-btn" onClick={reStartGame}>Restart</button>
             </div>
 
             <p className="turns">Turns: <strong>{turns}</strong></p>
