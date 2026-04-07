@@ -14,10 +14,93 @@ body {
 
 .App { max-width: 640px; margin: 0 auto; padding: 20px; text-align: center; }
 
+/* ── Header ── */
+.site-header {
+  background: linear-gradient(180deg, #2e4a7a 0%, #1e3560 100%);
+  border-bottom: 2px solid #1a2d50;
+  padding: 0 28px; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.header-logo {
+  font-size: 1.3rem; font-weight: 900; color: #fff;
+  letter-spacing: 2px; text-transform: uppercase;
+  background: #111; padding: 4px 12px; border-radius: 4px; cursor: pointer;
+}
+.header-right { display: flex; align-items: center; gap: 6px; }
+
+.hdr-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; cursor: pointer; border: none;
+  background: #3a5a9a; color: #d0e4ff;
+  font-family: 'Exo 2', sans-serif; transition: filter 0.2s;
+}
+.hdr-btn:hover { filter: brightness(1.15); }
+.hdr-btn svg   { width: 14px; height: 14px; }
+.btn-logout    { background: #7a2030; color: #ffd0d8; }
+
+/* ── Auth Screens ── */
+.auth-card {
+  max-width: 360px;
+  margin: 40px auto;
+  background: #0d1b3e;
+  border: 1px solid #1a3060;
+  border-radius: 16px;
+  padding: 36px 32px;
+}
+.auth-logo {
+  text-align: center;
+  font-size: 1.4rem;
+  color: #e94560;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.auth-card h2 { font-size: 1.5rem; text-align: center; margin-bottom: 6px; }
+.auth-sub { color: #7a8ab0; font-size: 0.85rem; text-align: center; margin-bottom: 28px; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; color: #a0b0d0; font-size: 0.8rem; margin-bottom: 6px; font-weight: 500; letter-spacing: 0.04em; }
+.form-group input {
+  width: 100%; background: #06153d; border: 1.5px solid #1a3060;
+  border-radius: 8px; padding: 10px 14px; color: #e0eaff;
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus { border-color: #e94560; }
+.form-group input::placeholder { color: #3a4a6a; }
+.password-hint { font-size: 0.74rem; color: #3a4a6a; margin-top: 4px; }
+
+.btn-primary {
+  width: 100%; padding: 11px; background: #e94560; color: white;
+  border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; margin-top: 8px; transition: background 0.2s;
+}
+.btn-primary:hover { background: #c73450; }
+
+.auth-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 20px 0; color: #3a4a6a; font-size: 0.78rem;
+}
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: #1a3060; }
+
+.btn-google {
+  width: 100%; padding: 10px; background: transparent; color: #a0b0d0;
+  border: 1.5px solid #1a3060; border-radius: 8px; font-size: 0.88rem;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.btn-google:hover { border-color: #e94560; color: #e0eaff; }
+
+.auth-switch { text-align: center; margin-top: 20px; font-size: 0.83rem; color: #7a8ab0; }
+.auth-switch span { color: #e94560; cursor: pointer; font-weight: 600; }
+
+
 /* ── Home Screen ── */
 .home { padding: 40px 20px; }
 .home h1 { font-size: 2.2rem; margin-bottom: 10px; }
 .subtitle { color: #aaa; margin-bottom: 40px; font-size: 1.1rem; }
+
 
 .level-btn {
   display: flex;
