@@ -96,6 +96,40 @@ body {
 .auth-switch span { color: #e94560; cursor: pointer; font-weight: 600; }
 
 
+/* ── Profile Dropdown ── */
+.profile-wrapper { position: relative; }
+
+.profile-dropdown {
+  position: absolute; right: 0; top: calc(100% + 10px);
+  background: #0d1b3e; border: 1px solid #1a3060;
+  border-radius: 12px; width: 220px;
+  padding: 12px 0; z-index: 100;
+}
+
+.profile-top {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 16px 14px;
+}
+.profile-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: #1a3060; border: 2px solid #e94560;
+  display: flex; align-items: center; justify-content: center;
+  color: #e0eaff; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+}
+.profile-name { color: #e0eaff; font-weight: 600; font-size: 0.9rem; }
+
+.profile-divider { border: none; border-top: 1px solid #1a3060; margin: 4px 0; }
+
+.dropdown-item {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 10px 16px;
+  background: transparent; border: none; color: #a0b0d0;
+  font-size: 0.88rem; cursor: pointer; text-align: left;
+  font-family: 'Exo 2', sans-serif; transition: background 0.15s, color 0.15s;
+}
+.dropdown-item:hover { background: #1a3060; color: #e0eaff; }
+.logout-item:hover { background: #3a1020; color: #f4a0b0; }
+
 /* ── Home Screen ── */
 .home { padding: 40px 20px; }
 .home h1 { font-size: 2.2rem; margin-bottom: 10px; }

@@ -1,20 +1,12 @@
 import { useState } from "react";
 
 function SignUp({ onSignUp, onSwitch }) {
-  const [form, setForm] = useState({
-    username: "", email: "", password: "", confirm: "",
-  });
-
-  const update = (field) => (e) =>
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+  const [form, setForm] = useState({ username: "", email: "", password: "", confirm: "" });
+  const update = field => e => setForm(prev => ({ ...prev, [field]: e.target.value }));
 
   const handleSubmit = () => {
-    if (form.password !== form.confirm) {
-      alert("Passwords do not match!");
-      return;
-    }
-    // TODO: connect to your auth logic
-    onSignUp(form);
+    if (form.password !== form.confirm) return alert("Passwords don't match!");
+    onSignUp({ username: form.username, email: form.email });
   };
 
   return (
@@ -43,12 +35,8 @@ function SignUp({ onSignUp, onSwitch }) {
 
       <button className="btn-primary" onClick={handleSubmit}>Create Account</button>
 
-      <div className="auth-divider"><span>or</span></div>
-      <button className="btn-google">Continue with Google</button>
-
       <p className="auth-switch">
-        Already have an account?{" "}
-        <span onClick={onSwitch}>Log in</span>
+        Already have an account? <span onClick={onSwitch}>Log in</span>
       </p>
     </div>
   );
