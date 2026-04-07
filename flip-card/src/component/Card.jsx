@@ -3,11 +3,7 @@ function Card({ card, isFlipped, handleChoice, disabled }) {
     return (
         <div
             className={`card ${isFlipped ? "flipped" : ""}`}
-            onClick={() => {
-                if (!disabled && !card.matched) {
-                    handleChoice(card);
-                }
-            }}
+            onClick={() => !disabled && handleChoice(card)}
         >
             <div className="card-inner">
                 <div className="card-front">

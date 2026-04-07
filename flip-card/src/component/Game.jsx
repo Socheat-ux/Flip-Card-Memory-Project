@@ -72,9 +72,11 @@ function Game ({difficulty, onHome}) {
     }, [choiceOne, choiceTwo]);
     
 
-    if (!won && cards.every(c => c.matched)) {
-        setWon(true);
-    }
+    useEffect(() => {
+        if (!won && cards.length > 0 && cards.every(c => c.matched)) {
+            setWon(true);
+        }
+    }, [cards, won]);
 
 
     const handleChoice = (card) => {
