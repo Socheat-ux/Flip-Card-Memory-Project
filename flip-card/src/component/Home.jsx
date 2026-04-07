@@ -1,5 +1,5 @@
 
-const Home = () => {
+const Home = ({onSelect}) => {
     const levels = [
        {name: "Easy", pairs: 8, emoji: "🟢", desc:"16 cards"},
        {name: "Medium", pairs: 12, emoji: "🟡", desc:"24 cards"},
