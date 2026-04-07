@@ -1,5 +1,6 @@
 import { useEffect, useState , useRef } from "react";
 import cardImg from "../card";
+import Card from "./Card";
 
 //Shuffle Card
 function shuffle(arr, pairs) {
@@ -16,9 +17,9 @@ function Game ({difficulty, onHome}) {
            : 4;
 
     // Set time based on difficulty
-    const timeLimit = difficulty.pairs === 8  ? 40   // Easy  = 30 seconds
-                  : difficulty.pairs === 12  ? 60  // Medium = 50s
-                  : 90;   
+    const timeLimit = difficulty.pairs === 8  ? 50   // Easy  = 40 seconds
+                  : difficulty.pairs === 12  ? 90  // Medium = 60s
+                  : 120; // Hard 2min
 
     const [cards, setCards] = useState(() => shuffle(cardImg, difficulty.pairs));
     const [choiceOne, setChoiceOne] = useState(null);
@@ -66,13 +67,14 @@ function Game ({difficulty, onHome}) {
             );
             resetTurn();
         } else {
-            setTimeout(resetTurn, 300);
+            setTimeout(resetTurn, 600);
         }
     }, [choiceOne, choiceTwo]);
     
-    useEffect(() => {
-        if (cards.length > 0 && cards.every(c => c.matched)) setWon(true);
-    }, [cards]);
+
+    if (!won && cards.every(c => c.matched)) {
+        setWon(true);
+    }
 
 
     const handleChoice = (card) => {
@@ -121,40 +123,19 @@ function Game ({difficulty, onHome}) {
                 </p>
             </div>
 
-            {won && (
-                <div className="win-banner">
-                🎉You Won in {turns} turns!
-                <div className="win-actions">
-                    <button onClick={reStartGame}>Play Again</button>
-                    <button onClick={onHome}>Change Level</button>
-                </div>
-                </div>
-            )}
-
-            {lost && (
-                <div className="lose-banner">
-                    Time's Up!
-                    <div className="win-actions">
-                        <button onClick={reStartGame}>Try Again</button>
-                        <button onClick={onHome}>Change Level</button>
-                    </div>
-                    </div>
-            )}
+            {won && <div>You Won!</div>}
+            {lost && <div>Time's Up!</div>}
+            
 
             <div className="card-grid" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
                 {cards.map(card => (
-                    <div
+                    <Card
                         key={card.id}
-                        className={`card ${isFlipped(card) ? "flipped" : ""}`}
-                        onClick={() => handleChoice(card)}
-                    >
-                        <div className="card-inner">
-                            <div className="card-front">
-                                <img src={card.src} alt="card" />
-                            </div>
-                            <div className="card-back">?</div>
-                        </div>
-                    </div>
+                        card={card}
+                        isFlipped={isFlipped(card)}
+                        handleChoice={handleChoice}
+                        disabled={disabled}
+                    />
                 ))}
             </div>
         </div>
