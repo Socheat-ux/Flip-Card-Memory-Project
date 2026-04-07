@@ -61,7 +61,7 @@ function Game () {
 
     const isFlipped = (card) =>{
         card.matched || choiceOne?.id === card.id || choiceTwo?.id === card.id;
-        const cols = difficulty.pairs === 12 ? 6 : 4;
+        const cols = difficulty.pairs === 16 ? 12 : 8;
     }
 
     return (
