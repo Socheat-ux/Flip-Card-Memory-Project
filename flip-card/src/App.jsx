@@ -1,13 +1,23 @@
 import { useState } from "react";
 import React from "react";
 import Game from "./component/Game";
+import Home from "./component/Home";
 
 function App() {
+
+  const [difficulty, setDifficulty] = useState(null);
+
   return (
     <>
       <section className="App">
-        <h1>Flip Card Memory</h1>
-        <button>New Game</button>
+        {difficulty === null ? (
+          <Home onSelect={setDifficulty} />
+        ) : (
+          <Game
+            difficulty={difficulty}
+            onHome={() => setDifficulty(null)}
+          />
+        )}
       </section>
     </>
   )

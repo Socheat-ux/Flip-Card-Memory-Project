@@ -1,38 +1,26 @@
-import card1 from "./assets/card1.jpg";
-import card2 from "./assets/card2.jpg";
-import card3 from "./assets/card3.jpg";
-import card4 from "./assets/card4.jpg";
-import fruit1 from "./assets/fruit1.jpg";
-import fruit2 from "./assets/fruit2.jpg";
-import fruit3 from "./assets/fruit3.jpg";   
-import fruit4 from "./assets/fruit4.jpg";
-import animal1 from "./assets/animal1.jpg";
-import animal2 from "./assets/animal2.jpg"; 
-import animal3 from "./assets/animal3.jpg";
-import animal4 from "./assets/animal4.jpg";
-import flower1 from "./assets/flower1.jpg";
-import flower2 from "./assets/flower2.jpg";
-import flower3 from "./assets/flower3.jpg";
-import flower4 from "./assets/flower4.jpg";
+import card1 from "./asset/card1.png";
+import card2 from "./asset/card2.png";
+import card3 from "./asset/card3.png";
+import card4 from "./asset/card4.png";
+import fruit1 from "./asset/fruit1.png";
+import fruit2 from "./asset/fruit2.png";
+import fruit from "./asset/fruit.png";   
+import fruit4 from "./asset/fruit4.png";
+import animal1 from "./asset/animal1.png";
+import animal2 from "./asset/animal2.png"; 
+import animal3 from "./asset/animal3.png";
+import animal4 from "./asset/animal4.png";
+import flower1 from "./asset/flower1.png";
+import flower2 from "./asset/flower2.png";
+import flower3 from "./asset/flower3.png";
+import flower4 from "./asset/flower4.png";
 
-export const cardImg = [
-   { "src": "./assets/card1.jpg" },
-   { "src": "./assets/card2.jpg" },
-   { "src": "./assets/card3.jpg" },
-   { "src": "./assets/card4.jpg" },
+const cardImg = [
+   { "src": "./asset/card1.png" }, { "src": "./asset/fruit1.png" }, { "src": "./asset/animal1.png" }, { "src": "./asset/flower1.png" },
+   { "src": "./asset/card2.png" }, { "src": "./asset/fruit2.png" }, { "src": "./asset/animal2.png" }, { "src": "./asset/flower2.png" },
+   { "src": "./asset/card3.png" }, { "src": "./asset/fruit.png" },  { "src": "./asset/animal3.png" }, { "src": "./asset/flower3.png" },
+   { "src": "./asset/card4.png" }, { "src": "./asset/fruit4.png" }, { "src": "./asset/animal4.png" }, { "src": "./asset/flower4.png" },
 
-   { "src": "./assets/fruit1.jpg" },
-   { "src": "./assets/fruit2.jpg" },
-   { "src": "./assets/fruit3.jpg" },
-   { "src": "./assets/fruit4.jpg" },
-
-   { "src": "./assets/animal1.jpg" },
-   { "src": "./assets/animal2.jpg" },
-   { "src": "./assets/animal3.jpg" },
-   { "src": "./assets/animal4.jpg" },
-
-   { "src": "./assets/flower1.jpg" },
-   { "src": "./assets/flower2.jpg" },
-   { "src": "./assets/flower3.jpg" },
-   { "src": "./assets/flower4.jpg" },
 ];
+
+export default cardImg;

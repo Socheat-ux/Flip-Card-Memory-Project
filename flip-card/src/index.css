@@ -1,32 +1,91 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+
 body {
-  font-family: sans-serif;
-  margin: 0;
-  text-align: center;
-  font-size: 1.5rem;
-  background-color: rgba(137, 162, 209, 0.836);
-  color: black;
-
+  background: #020818;
+  color: #e0eaff;
+  font-family: 'Exo 2', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.App {
-  max-width: 860px;
-  margin: 40 auto;
-}
+.App { max-width: 640px; margin: 0 auto; padding: 20px; text-align: center; }
 
-button {
-  background: none;
-  border: 2px solid black;
-  border-radius: 4px;
-  padding: 6px 12px;
-  color: #fff;
-  font-size: 1rem;
+/* ── Home Screen ── */
+.home { padding: 40px 20px; }
+.home h1 { font-size: 2.2rem; margin-bottom: 10px; }
+.subtitle { color: #aaa; margin-bottom: 40px; font-size: 1.1rem; }
+
+.level-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border: none;
+  border-radius: 14px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.level-btn:hover { transform: scale(1.03); opacity: 0.9; }
+
+.level-btn.easy   { background: #1a472a; color: #a3e4b0; }
+.level-btn.medium { background: #4a3800; color: #fcd97c; }
+.level-btn.hard   { background: #4a1020; color: #f4a0b0; }
+
+.level-emoji { font-size: 1.6rem; }
+.level-name  { font-size: 1.3rem; font-weight: bold; flex: 1; text-align: left; }
+.level-desc  { font-size: 0.9rem; opacity: 0.8; }
+
+/* ── Game Screen ── */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.back-btn, .restart-btn {
+  background: #0f3460; color: white; border: none;
+  padding: 8px 16px; border-radius: 8px; cursor: pointer;
+}
+.back-btn:hover, .restart-btn:hover { background: #1a4a80; }
+
+.turns { margin-bottom: 16px; font-size: 1.1rem; }
+
+.win-banner {
+  background: #0f3460;
+  border: 2px solid #e94560;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
   font-weight: bold;
-  
+}
+.win-actions { display: flex; gap: 12px; justify-content: center; margin-top: 12px; }
+.win-actions button {
+  background: #e94560; color: white; border: none;
+  padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95rem;
 }
 
-button:hover {
-  background: #dc5f89;
-  color: #fff;
+.card-grid { display: grid; gap: 10px; }
+
+.card { height: 90px; perspective: 1000px; cursor: pointer; }
+.card-inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
 }
+.card.flipped .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+}
+.card-front { background: #16213e; transform: rotateY(180deg); }
+.card-back  { background: #0f3460; border: 2px solid #e94560; }
