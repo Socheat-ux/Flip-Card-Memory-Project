@@ -13,6 +13,14 @@ function App() {
   const handleLogin = (u) => { setUser(u); setScreen("home"); };
   const handleLogout = () => { setUser(null); setScreen("login"); setDifficulty(null); };
   const handleNavigate = (s) => { setScreen(s); setDifficulty(null); };
+  const handleSelectDifficulty = (d) => {
+    setDifficulty(d);
+  };
+
+  const handleStartGame = () => {
+    if (!difficulty) return;
+    setScreen("game");
+  };
 
   return (
     <>
@@ -24,7 +32,7 @@ function App() {
       <section className="App">
         {screen === "login"  && <Login onLogin={handleLogin} onSwitch={() => setScreen("signup")} />}
         {screen === "signup" && <SignUp onSignUp={handleLogin} onSwitch={() => setScreen("login")} />}
-        {screen === "home"   && <Home onSelect={(d) => { setDifficulty(d); setScreen("game"); }} />}
+        {screen === "home" && (<Home onSelect={handleSelectDifficulty} onStartGame={handleStartGame}/>)}
         {screen === "game"   && <Game difficulty={difficulty} onHome={() => handleNavigate("home")} />}
       </section>
     </>

@@ -6,7 +6,7 @@ function Login({ onLogin, onSwitch }) {
 
   return (
     <div className="auth-card">
-      <div className="auth-logo">⟨ FC ⟩</div>
+      <div className="auth-logo">LOGIN</div>
       <h2>Welcome Back</h2>
       <p className="auth-sub">Log in to continue playing</p>
 

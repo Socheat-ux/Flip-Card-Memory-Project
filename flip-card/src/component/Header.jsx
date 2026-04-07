@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { LogIn, LogOut, User } from "lucide-react";
 
+import logo from "/src/asset/logo.png";
+
 function Header({ user, onLogout, onNavigate }) {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <header className="site-header">
       <div className="header-logo" onClick={() => onNavigate("home")}>
-        ⟨ Flip Cards Game ⟩
+        <img src={logo} alt="Logo" className="logo"/>
+        Flip Cards Game
       </div>
 
       <div className="header-right">
