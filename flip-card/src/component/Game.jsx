@@ -9,14 +9,16 @@ function shuffle(arr, pairs) {
 }
 
 
-function Game () {
+function Game ({difficulty, onHome}) {
 
+    const cols = difficulty.pairs === 16 ? 12 : 8;
+    
     const [cards, setCards] = useState(() => shuffle(cardImg, difficulty.pairs));
     const [choiceOne, setChoiceOne] = useState(null);
     const [choiceTwo, setChoiceTwo] = useState(null);
     const [disabled, setDisabled] = useState(false);
     const [turns, setTurns] = useState(0);
-    const [won, setWon] = useState(null);
+    const [won, setWon] = useState(false);
 
     useEffect(() => {
         if(!choiceOne || !choiceTwo) return;
@@ -51,7 +53,7 @@ function Game () {
     }
 
     const reStartGame = () => {
-        setCards(shuffleCards(cardImg, difficulty.pairs));
+        setCards(shuffle(cardImg, difficulty.pairs));
         setChoiceOne(null);
         setChoiceTwo(null);
         setTurns(0);
@@ -61,7 +63,6 @@ function Game () {
 
     const isFlipped = (card) =>{
         card.matched || choiceOne?.id === card.id || choiceTwo?.id === card.id;
-        const cols = difficulty.pairs === 16 ? 12 : 8;
     }
 
     return (
