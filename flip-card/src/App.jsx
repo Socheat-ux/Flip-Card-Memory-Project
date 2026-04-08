@@ -4,7 +4,7 @@ import Home from "./component/Home";
 import Header from "./component/Header";
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
-import Leaderboard from "./component/Leaderboard";
+import Leaderboard from "./component/LeaderBoard.jsx";
 import Profile from "./component/Profile";
 
 function App() {
