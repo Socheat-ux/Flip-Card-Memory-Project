@@ -17,6 +17,7 @@ function SignUp({ onSignUp, onSwitch }) {
     return;
   }
 
+  //JSON.parse(...) : use to convert string to JavaScript object 
   const users = JSON.parse(localStorage.getItem("users")) || [];
 
   const exists = users.find(u => u.email === form.email);
@@ -31,6 +32,9 @@ function SignUp({ onSignUp, onSwitch }) {
     password: form.password,
   };
 
+  //JSON.stringify(...) : use to convert JavaScript opject to string because
+  //localStorage store data as a string in browser
+  //Take old users → add new user → convert to string → save in browser
   localStorage.setItem("users", JSON.stringify([...users, newUser]));
 
   setError("");

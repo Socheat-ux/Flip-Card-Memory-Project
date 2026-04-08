@@ -9,6 +9,31 @@ function shuffle(arr, pairs) {
     .sort(() => Math.random() - 0.5);
 }
 
+
+function calculateScore({ pairs, timeLimit, timeLeft, turns, won }) {
+  if (!won) return 0;
+
+  const baseScores  = { 8: 500,  12: 800,  16: 1200 };
+  const multipliers = { 8: 1.0,  12: 1.5,  16: 2.0  };
+
+  const base        = baseScores[pairs]  ?? 500;
+  const multi       = multipliers[pairs] ?? 1.0;
+  const timeUsed    = timeLimit - timeLeft;
+  const movePenalty = turns * 5;
+  const timePenalty = timeUsed * 2;
+
+  return Math.max(0, Math.round((base * multi) - movePenalty - timePenalty));
+}
+
+const saveResult = (username, result) => {
+  const history = JSON.parse(localStorage.getItem("gameResults")) || [];
+
+  localStorage.setItem(
+    "gameResults",
+    JSON.stringify([{ username, ...result }, ...history])
+  );
+};
+
 function Game({ difficulty, onHome, user }) {
   const cols = difficulty.pairs === 16 ? 8 : 4;
   const timeLimit = difficulty.pairs === 8 ? 50 : difficulty.pairs === 12 ? 90 : 120;
@@ -19,9 +44,12 @@ function Game({ difficulty, onHome, user }) {
   const [disabled, setDisabled] = useState(false);
   const [turns, setTurns]       = useState(0);
   const [won, setWon]           = useState(false);
+  const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const [lost, setLost]         = useState(false);
+  const [saved, setSaved] = useState(false);
   const timerRef = useRef(null);
+  
 
   // Timer
   useEffect(() => {
@@ -71,6 +99,36 @@ function Game({ difficulty, onHome, user }) {
     if (!won && cards.length > 0 && cards.every(c => c.matched)) setWon(true);
   }, [cards, won]);
 
+  
+  // Save result when game ends
+  useEffect(() => {
+    if ((won || lost) && !saved) {
+      setSaved(true);
+      const finalScore = calculateScore({
+        pairs: difficulty.pairs,
+        timeLimit,
+        timeLeft,
+        turns,
+        won,
+      });
+      setScore(finalScore);
+
+      const result = {
+        score: finalScore,
+        won,
+        turns,
+        timeLeft,
+        timeUsed: timeLimit - timeLeft,
+        difficulty: difficulty.name,
+        date: new Date().toISOString(),
+      };
+
+      if (user?.username) {
+        saveResult(user.username, result);
+      }
+    }
+  }, [won, lost, saved, difficulty, turns, timeLeft]);
+
   const handleChoice = (card) => {
     if (disabled || card.matched || lost || won) return;
     if (choiceOne?.id === card.id) return;
@@ -79,16 +137,24 @@ function Game({ difficulty, onHome, user }) {
   };
 
   const resetTurn = () => {
-    setChoiceOne(null); setChoiceTwo(null);
-    setTurns(t => t + 1); setDisabled(false);
+    setChoiceOne(null); 
+    setChoiceTwo(null);
+    setTurns(t => t + 1); 
+    setDisabled(false);
   };
 
   const reStartGame = () => {
     clearInterval(timerRef.current);
+    timerRef.current = null;
     setCards(shuffle(cardImg, difficulty.pairs));
-    setChoiceOne(null); setChoiceTwo(null);
-    setTurns(0); setWon(false); setLost(false);
-    setDisabled(false); setTimeLeft(timeLimit);
+    setChoiceOne(null); 
+    setChoiceTwo(null);
+    setTurns(0); 
+    setWon(false); 
+    setLost(false);
+    setDisabled(false); 
+    setScore(0);
+    setSaved(false);
   };
 
   const isFlipped = (card) => card.matched || choiceOne?.id === card.id || choiceTwo?.id === card.id;
@@ -115,6 +181,7 @@ function Game({ difficulty, onHome, user }) {
       {won && (
         <div className="win-banner">
           🎉 You Won in {turns} moves!
+          <p>Score: <strong>{score}</strong></p>
           <div className="win-actions">
             <button onClick={reStartGame}>Play Again</button>
             <button onClick={onHome}>Home</button>
@@ -125,6 +192,7 @@ function Game({ difficulty, onHome, user }) {
       {lost && (
         <div className="lose-banner">
           ⏰ Time's Up!
+          <p>Score: <strong>{score}</strong></p>
           <div className="win-actions">
             <button onClick={reStartGame}>Try Again</button>
             <button onClick={onHome}>Home</button>
