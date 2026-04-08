@@ -29,7 +29,7 @@ const saveResult = (username, result) => {
 
   localStorage.setItem(
     "gameResults",
-    JSON.stringify([{ username, ...result }, ...history]),
+    JSON.stringify([{ username, ...result }, ...history])
   );
 };
 
@@ -38,7 +38,9 @@ function Game({ difficulty, onHome, user }) {
   const timeLimit =
     difficulty.pairs === 8 ? 50 : difficulty.pairs === 12 ? 90 : 120;
 
-  const [cards, setCards] = useState(() => shuffle(cardImg, difficulty.pairs));
+  const [cards, setCards] = useState(() =>
+    shuffle(cardImg, difficulty.pairs)
+  );
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
@@ -47,12 +49,12 @@ function Game({ difficulty, onHome, user }) {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const [lost, setLost] = useState(false);
-  const [saved, setSaved] = useState(false);
   const timerRef = useRef(null);
 
   // Timer
   useEffect(() => {
     if (won || lost) return;
+
     timerRef.current = setInterval(() => {
       setTimeLeft((t) => {
         if (t <= 1) {
@@ -63,59 +65,15 @@ function Game({ difficulty, onHome, user }) {
         return t - 1;
       });
     }, 1000);
-    return () => clearInterval(timerRef.current);
-  }, [won, lost, timeLeft]);
 
-  // Save score to leaderboard when won
+    return () => clearInterval(timerRef.current);
+  }, [won, lost]);
+
+  // Handle win → calculate score + save leaderboard
   useEffect(() => {
     if (won) {
       soundWin();
-      const entry = {
-        username: user?.username || "Guest",
-        difficulty: difficulty.name,
-        turns,
-        timeLeft,
-        timeTaken: timeLimit - timeLeft,
-        score,
-        date: new Date().toLocaleDateString(),
-      };
-      const prev = JSON.parse(localStorage.getItem("fc_leaderboard") || "[]");
-      localStorage.setItem(
-        "fc_leaderboard",
-        JSON.stringify([entry, ...prev].slice(0, 50)),
-      );
-    }
-  }, [won, score]);
 
-  useEffect(() => {
-    if (lost) soundLose();
-  }, [lost]);
-
-  // Check match
-  useEffect(() => {
-    if (!choiceOne || !choiceTwo) return;
-    setDisabled(true);
-    if (choiceOne.src === choiceTwo.src) {
-      soundMatch();
-      setCards((prev) =>
-        prev.map((c) =>
-          c.src === choiceOne.src ? { ...c, matched: true } : c,
-        ),
-      );
-      resetTurn();
-    } else {
-      setTimeout(resetTurn, 600);
-    }
-  }, [choiceOne, choiceTwo]);
-
-  useEffect(() => {
-    if (!won && cards.length > 0 && cards.every((c) => c.matched)) setWon(true);
-  }, [cards, won]);
-
-  // Save result when game ends
-  useEffect(() => {
-    if ((won || lost) && !saved) {
-      setSaved(true);
       const finalScore = calculateScore({
         pairs: difficulty.pairs,
         timeLimit,
@@ -123,27 +81,72 @@ function Game({ difficulty, onHome, user }) {
         turns,
         won,
       });
+
       setScore(finalScore);
 
-      const result = {
-        score: finalScore,
-        won,
-        turns,
-        timeLeft,
-        timeUsed: timeLimit - timeLeft,
+      const entry = {
+        username: user?.username || "Guest",
         difficulty: difficulty.name,
-        date: new Date().toISOString(),
+        turns,
+        timeTaken: timeLimit - timeLeft,
+        score: finalScore,
+        date: new Date().toLocaleDateString(),
       };
 
+      const prev = JSON.parse(
+        localStorage.getItem("fc_leaderboard") || "[]"
+      );
+
+      localStorage.setItem(
+        "fc_leaderboard",
+        JSON.stringify([entry, ...prev].slice(0, 50))
+      );
+
+      // Optional history save
       if (user?.username) {
-        saveResult(user.username, result);
+        saveResult(user.username, {
+          ...entry,
+          won: true,
+        });
       }
     }
-  }, [won, lost, saved, difficulty, turns, timeLeft]);
+  }, [won]);
+
+  // Lose sound
+  useEffect(() => {
+    if (lost) soundLose();
+  }, [lost]);
+
+  // Check match
+  useEffect(() => {
+    if (!choiceOne || !choiceTwo) return;
+
+    setDisabled(true);
+
+    if (choiceOne.src === choiceTwo.src) {
+      soundMatch();
+      setCards((prev) =>
+        prev.map((c) =>
+          c.src === choiceOne.src ? { ...c, matched: true } : c
+        )
+      );
+      resetTurn();
+    } else {
+      setTimeout(resetTurn, 600);
+    }
+  }, [choiceOne, choiceTwo]);
+
+  // Check win condition
+  useEffect(() => {
+    if (!won && cards.length > 0 && cards.every((c) => c.matched)) {
+      setWon(true);
+    }
+  }, [cards, won]);
 
   const handleChoice = (card) => {
     if (disabled || card.matched || lost || won) return;
     if (choiceOne?.id === card.id) return;
+
     soundFlip();
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
@@ -166,11 +169,12 @@ function Game({ difficulty, onHome, user }) {
     setDisabled(false);
     setTimeLeft(timeLimit);
     setScore(0);
-    setSaved(false);
   };
 
   const isFlipped = (card) =>
-    card.matched || choiceOne?.id === card.id || choiceTwo?.id === card.id;
+    card.matched ||
+    choiceOne?.id === card.id ||
+    choiceTwo?.id === card.id;
 
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60)
