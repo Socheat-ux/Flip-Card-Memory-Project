@@ -362,3 +362,44 @@ hr {
   font-weight: bold;
   text-align: center;
 }
+
+/* ── Leaderboard ── */
+.leaderboard { max-width: 640px; margin: 0 auto; padding: 10px; }
+.lb-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; color: black; }
+.lb-section { margin-bottom: 28px; }
+.lb-diff { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; padding: 4px 12px; border-radius: 8px; display: inline-block; }
+.lb-easy   { background: #1a472a; color: #a3e4b0; }
+.lb-medium { background: #4a3800; color: #fcd97c; }
+.lb-hard   { background: #4a1020; color: #f4a0b0; }
+.lb-table { width: 100%; border-collapse: collapse; background: #ffffffcc; border-radius: 10px; overflow: hidden; color: black; }
+.lb-table th { background: #FF94F4; padding: 8px 12px; font-size: 0.82rem; text-align: left; }
+.lb-table td { padding: 8px 12px; font-size: 0.88rem; border-top: 1px solid #e0d0f0; }
+.lb-gold td  { background: #fff9c4; font-weight: 700; }
+.lb-empty { color: #888; font-size: 0.85rem; padding: 8px 0; }
+
+/* ── Profile Page ── */
+.profile-page { max-width: 640px; margin: 0 auto; padding: 10px; }
+.profile-card { background: #FF94F4; border-radius: 16px; padding: 28px; text-align: center; margin-bottom: 24px; color: black; }
+.profile-avatar.large { width: 64px; height: 64px; font-size: 1.4rem; border-radius: 50%; background: #1a3060; border: 3px solid #e94560; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin: 0 auto 12px; }
+.profile-card h3 { font-size: 1.4rem; margin-bottom: 4px; }
+.profile-email { color: #555; font-size: 0.85rem; margin-bottom: 8px; }
+.profile-total { font-size: 0.95rem; }
+.profile-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+.stat-card { flex: 1; min-width: 140px; border-radius: 12px; padding: 16px; color: black; }
+.stat-easy   { background: #c8f5d4; }
+.stat-medium { background: #fef3c7; }
+.stat-hard   { background: #ffe4e6; }
+.stat-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+.stat-card p  { font-size: 0.88rem; margin-bottom: 4px; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .card-grid { width: 100% !important; padding: 12px; gap: 6px; }
+  .card { height: 70px; }
+  .card-front img { width: 60px; height: 60px; }
+  .site-header { padding: 0 12px; height: auto; flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+  .header-logo { font-size: 1rem; }
+  .hdr-btn { padding: 5px 10px; font-size: 0.72rem; }
+  .level-grid { flex-direction: column; }
+  .profile-stats { flex-direction: column; }
+}

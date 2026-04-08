@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { LogIn, LogOut, User } from "lucide-react";
-
+import { LogIn, LogOut, User, Trophy } from "lucide-react";
 import logo from "/src/asset/logo.png";
 
 function Header({ user, onLogout, onNavigate }) {
@@ -9,23 +8,30 @@ function Header({ user, onLogout, onNavigate }) {
   return (
     <header className="site-header">
       <div className="header-logo" onClick={() => onNavigate("home")}>
-        <img src={logo} alt="Logo" className="logo"/>
+        <img src={logo} alt="Logo" className="logo" />
         Flip Cards Game
       </div>
 
       <div className="header-right">
+        <button className="hdr-btn" onClick={() => onNavigate("leaderboard")}>
+          <Trophy size={14} /> Leaderboard
+        </button>
+
         {user ? (
           <div className="profile-wrapper">
             <button className="hdr-btn" onClick={() => setShowDropdown(p => !p)}>
               <User size={14} /> {user.username}
             </button>
-
             {showDropdown && (
               <div className="profile-dropdown">
                 <div className="profile-top">
                   <div className="profile-avatar">{user.username.slice(0, 2).toUpperCase()}</div>
                   <span className="profile-name">{user.username}</span>
                 </div>
+                <hr className="profile-divider" />
+                <button className="dropdown-item" onClick={() => { onNavigate("profile"); setShowDropdown(false); }}>
+                  <User size={15} /> My Profile
+                </button>
                 <hr className="profile-divider" />
                 <button className="dropdown-item logout-item" onClick={() => { onLogout(); setShowDropdown(false); }}>
                   <LogOut size={15} /> Log Out
