@@ -145,17 +145,29 @@ hr { width: 100%; border: none; border-top: 1px solid #2a5a9a; margin: 20px 0; }
 
 /* Leaderboard */
 .leaderboard { max-width: 640px; margin: 0 auto; padding: 10px; }
-.lb-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.lb-header { display: flex; gap: 105px; margin-bottom: 24px; }
 .lb-section { margin-bottom: 28px; }
 .lb-diff { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; padding: 4px 12px; border-radius: 8px; display: inline-block; }
 .lb-easy   { background: #1a472a; color: #a3e4b0; }
 .lb-medium { background: #4a3800; color: #fcd97c; }
 .lb-hard   { background: #4a1020; color: #f4a0b0; }
-.lb-table { width: 100%; border-collapse: collapse; background: #12365bcc; border-radius: 10px; overflow: hidden; color: #e0eaff; }
+.lb-table { width: 100%; border-collapse: collapse; background: #12365bcc; border-radius: 10px; overflow: hidden; color: #e0eaff;}
 .lb-table th { background: #1947ab; padding: 8px 12px; font-size: 0.82rem; text-align: left; }
 .lb-table td { padding: 8px 12px; font-size: 0.88rem; border-top: 1px solid #1a3060; }
 .lb-gold td { background: #5a5a1e; font-weight: 700; }
 .lb-empty { color: #5b81da; font-size: 0.85rem; padding: 8px 0; }
+.lb-table th,
+.lb-table td {
+  width: 20%; /* ADD THIS */
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  border-top: 1px solid #1a3060;
+  text-align: center; /* or left, if you prefer */
+  white-space: nowrap; /* prevents wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* Profile */
 .profile-page { max-width: 640px; margin: 0 auto; padding: 10px; }

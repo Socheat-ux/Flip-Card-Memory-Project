@@ -29,7 +29,7 @@ function Leaderboard({ onBack }) {
           ) : (
             <table className="lb-table">
               <thead>
-                <tr><th>#</th><th>Player</th><th>Moves</th><th>Time</th><th>Date</th></tr>
+                <tr><th>#</th><th>Player</th><th>Moves</th><th>Time</th><th>Score</th><th>Date</th></tr>
               </thead>
               <tbody>
                 {byDiff(diff).slice(0, 5).map((e, i) => (
@@ -38,6 +38,7 @@ function Leaderboard({ onBack }) {
                     <td>{e.username}</td>
                     <td>{e.turns}</td>
                     <td>{e.timeTaken}s</td>
+                    {/* <td>{e.score}</td> */}
                     <td>{e.date}</td>
                   </tr>
                 ))}
