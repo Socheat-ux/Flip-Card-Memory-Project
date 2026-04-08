@@ -38,7 +38,7 @@ function Leaderboard({ onBack }) {
                     <td>{e.username}</td>
                     <td>{e.turns}</td>
                     <td>{e.timeTaken}s</td>
-                    {/* <td>{e.score}</td> */}
+                    <td>{e.score}</td>
                     <td>{e.date}</td>
                   </tr>
                 ))}
