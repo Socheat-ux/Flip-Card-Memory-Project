@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import cardImg from "../card";
 import Card from "./Card";
-import { soundFlip, soundMatch, soundWin, soundLose } from "../sounds";
 
 function shuffle(arr, pairs) {
   return [...arr.slice(0, pairs), ...arr.slice(0, pairs)]
@@ -54,7 +53,6 @@ function Game({ difficulty, onHome, user }) {
   // Timer
   useEffect(() => {
     if (won || lost) return;
-
     timerRef.current = setInterval(() => {
       setTimeLeft((t) => {
         if (t <= 1) {
@@ -71,9 +69,7 @@ function Game({ difficulty, onHome, user }) {
 
   // Handle win → calculate score + save leaderboard
   useEffect(() => {
-    if (won) {
-      soundWin();
-
+    if (won || lost) {
       const finalScore = calculateScore({
         pairs: difficulty.pairs,
         timeLimit,
@@ -89,7 +85,7 @@ function Game({ difficulty, onHome, user }) {
         difficulty: difficulty.name,
         turns,
         timeTaken: timeLimit - timeLeft,
-        score: finalScore,
+        score: won ? finalScore : 0,
         date: new Date().toLocaleDateString(),
       };
 
@@ -112,10 +108,6 @@ function Game({ difficulty, onHome, user }) {
     }
   }, [won]);
 
-  // Lose sound
-  useEffect(() => {
-    if (lost) soundLose();
-  }, [lost]);
 
   // Check match
   useEffect(() => {
@@ -124,7 +116,6 @@ function Game({ difficulty, onHome, user }) {
     setDisabled(true);
 
     if (choiceOne.src === choiceTwo.src) {
-      soundMatch();
       setCards((prev) =>
         prev.map((c) =>
           c.src === choiceOne.src ? { ...c, matched: true } : c
@@ -147,7 +138,6 @@ function Game({ difficulty, onHome, user }) {
     if (disabled || card.matched || lost || won) return;
     if (choiceOne?.id === card.id) return;
 
-    soundFlip();
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
