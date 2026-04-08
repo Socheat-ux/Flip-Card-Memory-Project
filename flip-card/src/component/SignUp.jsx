@@ -5,9 +5,17 @@ function SignUp({ onSignUp, onSwitch }) {
   const update = field => e => setForm(prev => ({ ...prev, [field]: e.target.value }));
 
   const handleSubmit = () => {
-    if (form.password !== form.confirm) return alert("Passwords don't match!");
-    onSignUp({ username: form.username, email: form.email });
-  };
+  if (!form.username || !form.email || !form.password || !form.confirm) {
+    setError("Please fill in all fields.");
+    return;
+  }
+  if (form.password !== form.confirm) {
+    setError("Passwords don't match!");
+    return;
+  }
+  setError("");
+  onSignUp({ username: form.username, email: form.email });
+};
 
   return (
     <div className="auth-card">

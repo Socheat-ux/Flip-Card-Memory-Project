@@ -3,10 +3,20 @@ import { useState } from "react";
 function Login({ onLogin, onSwitch }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = () => {
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    setError("");
+    onLogin({ username: email.split("@")[0], email });
+  };
 
   return (
     <div className="auth-card">
-      <div className="auth-logo">LOGIN</div>
+      <div className="auth-logo">⟨ FC ⟩</div>
       <h2>Welcome Back</h2>
       <p className="auth-sub">Log in to continue playing</p>
 
@@ -21,9 +31,9 @@ function Login({ onLogin, onSwitch }) {
           value={password} onChange={e => setPassword(e.target.value)} />
       </div>
 
-      <button className="btn-primary" onClick={() => onLogin({ username: email.split("@")[0], email })}>
-        Log In
-      </button>
+      {error && <p className="auth-error">{error}</p>}
+
+      <button className="btn-primary" onClick={handleSubmit}>Log In</button>
 
       <p className="auth-switch">
         Don't have an account? <span onClick={onSwitch}>Sign up</span>
