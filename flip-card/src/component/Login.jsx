@@ -10,8 +10,20 @@ function Login({ onLogin, onSwitch }) {
       setError("Please fill in all fields.");
       return;
     }
+     
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const user = users.find(
+      u => u.email === email && u.password === password
+    );
+
+    if (!user) {
+      setError("Invalid email or password.");
+      return;
+    }
+
     setError("");
-    onLogin({ username: email.split("@")[0], email });
+    onLogin(user);
   };
 
   return (

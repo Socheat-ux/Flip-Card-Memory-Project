@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 function SignUp({ onSignUp, onSwitch }) {
+
+  const [error, setError] = useState("");
+
   const [form, setForm] = useState({ username: "", email: "", password: "", confirm: "" });
   const update = field => e => setForm(prev => ({ ...prev, [field]: e.target.value }));
 
@@ -13,8 +16,25 @@ function SignUp({ onSignUp, onSwitch }) {
     setError("Passwords don't match!");
     return;
   }
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const exists = users.find(u => u.email === form.email);
+  if (exists) {
+    setError("Email already exists!");
+    return;
+  }
+
+  const newUser = {
+    username: form.username,
+    email: form.email,
+    password: form.password,
+  };
+
+  localStorage.setItem("users", JSON.stringify([...users, newUser]));
+
   setError("");
-  onSignUp({ username: form.username, email: form.email });
+  onSignUp(newUser);
 };
 
   return (
