@@ -39,7 +39,7 @@ function SignUp({ onSignUp, onSwitch }) {
 
   return (
     <div className="auth-card">
-      <div className="auth-logo">SIGN IN</div>
+      <div className="auth-logo">Flip Card Memory</div>
       <h2>Create Account</h2>
       <p className="auth-sub">Join the memory challenge</p>
 
@@ -61,6 +61,7 @@ function SignUp({ onSignUp, onSwitch }) {
         <input type="password" placeholder="••••••••" value={form.confirm} onChange={update("confirm")} />
       </div>
 
+      {error && <p className="auth-error">{error}</p>}
       <button className="btn-primary" onClick={handleSubmit}>Create Account</button>
 
       <p className="auth-switch">
