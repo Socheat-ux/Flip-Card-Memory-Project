@@ -159,6 +159,10 @@ function Game({ difficulty, onHome, user }) {
     setDisabled(false);
     setTimeLeft(timeLimit);
     setScore(0);
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
   };
 
   const isFlipped = (card) =>
