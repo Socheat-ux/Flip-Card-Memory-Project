@@ -161,7 +161,13 @@ function Game({ difficulty, onHome, user }) {
     setScore(0);
 
     timerRef.current = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
   };
 
