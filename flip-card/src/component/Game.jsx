@@ -69,7 +69,7 @@ function Game({ difficulty, onHome, user }) {
 
   // Handle win → calculate score + save leaderboard
   useEffect(() => {
-    if (won || lost) {
+    if (won) {
       const finalScore = calculateScore({
         pairs: difficulty.pairs,
         timeLimit,
@@ -85,7 +85,7 @@ function Game({ difficulty, onHome, user }) {
         difficulty: difficulty.name,
         turns,
         timeTaken: timeLimit - timeLeft,
-        score: won ? finalScore : 0,
+        score: finalScore,
         date: new Date().toLocaleDateString(),
       };
 
