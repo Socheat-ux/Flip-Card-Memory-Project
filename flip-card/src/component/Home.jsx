@@ -16,7 +16,7 @@ const Home = ({ onSelect, onStartGame }) => {
 
     return(
     <div className="home">
-    <h1>Flip Card Memory</h1>
+    <h1>Flip Card Memory Game</h1>
     <hr/>
     <p className="subtitle">Select difficulty:</p>
 
